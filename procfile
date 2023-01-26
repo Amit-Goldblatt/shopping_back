@@ -1,1 +1,1 @@
-web: guinicorn shopping.wsgi
+web: guinicorn SHOPPING.w

@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'shopping.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if 'RENDER' in os.environ:
+if 'HEROKU' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',

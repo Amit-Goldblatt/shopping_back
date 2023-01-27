@@ -1,2 +1,1 @@
-web: gunishopping.wsgi
-test
+web: gunicorn shopping.wsgi

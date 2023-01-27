@@ -84,13 +84,13 @@ WSGI_APPLICATION = 'shopping.wsgi.application'
 if 'HEROKU' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'shopping_db',
-            'USER': 'shopping_db_user',
-            'PASSWORD': 'gbuNAzAccVPjyZtqPESeqj0ki93FPGOe',
-            # 'HOST': 'dpg-cf422dmn6mps0qnc92pg-a',
-            'HOST': 'dpg-cf422dmn6mps0qnc92pg-a.frankfurt-postgres.render.com',        
-            'PORT': '5432',
+            'OPTIONS': {
+			'HOST': os.getenv('PGHOST'),
+			'USER': os.getenv('PGUSER'),
+			'PASSWORD': os.getenv('PGPASS'),
+            }
         }
     }
 else:

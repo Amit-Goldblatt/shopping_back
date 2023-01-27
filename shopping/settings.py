@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'shopping.wsgi.application'
 if 'HEROKU' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'shopping_db',
             'OPTIONS': {
 			'HOST': os.getenv('PGHOST'),

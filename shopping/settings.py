@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-psgl@w&%zlszxj448)@mvh^2!s49rzj#gij^h*!q-^i@vjt3x2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['backshoping.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['backshoping.herokuapp.com', 'localhost:8000', 'localhost']
 
 
 # Application definition

@@ -8,7 +8,7 @@ class SoftDeleteManager(models.Manager):
 
 class SoftDeleteModel(models.Model):
 
-    deleted_at = models.DateTimeField(null=True, default=None)
+    deleted_at = models.DateTimeField(null=True, default=None, blank=True)
     objects = SoftDeleteManager()
     all_objects = models.Manager()
 

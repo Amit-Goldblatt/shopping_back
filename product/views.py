@@ -15,6 +15,7 @@ def product_list(request):
 
     elif request.method == 'POST':
         serializer = P(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -52,8 +53,13 @@ def cart_list(request):
     elif request.method == 'POST':
         serializer = CartSerializer(data=request.data)
         if serializer.is_valid():
+            # check if product already exists
+            print(serializer.validated_data)
+            if CartItem.objects.filter(product=serializer.validated_data['product']).exists():
+                return Response({'error': 'Product already exists'}, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -69,9 +75,11 @@ def cart_detail(request, pk):
 
     elif request.method == 'PUT':
         serializer = CartSerializer(cart, data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':

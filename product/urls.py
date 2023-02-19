@@ -7,3 +7,4 @@ urlpatterns = [
     path ('cart/', cart_list),
     path('cart/<int:pk>/', cart_detail),
 ]
+

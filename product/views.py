@@ -4,10 +4,12 @@ from rest_framework.response import Response
 from .models import Product, CartItem
 from product.serializers import ProductSerializer
 from .serializers.ProductSerializer import ProductSerializer as P
-from .serializers.CartSerializer import CartSerializer , CartSerializerFull
+from .serializers.CartSerializer import CartSerializer, CartSerializerFull
+
+# view for all products (exepet deleted)
 @api_view(['GET', 'POST'])
 def product_list(request):
-  
+
     if request.method == 'GET':
         products = Product.objects.all()
         serializer = P(products, many=True)
@@ -21,6 +23,7 @@ def product_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# view for single product
 @api_view(['GET', 'PUT', 'DELETE'])
 def product_detail(request, pk):
     try:
@@ -43,6 +46,7 @@ def product_detail(request, pk):
         product.soft_delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# view for all cart items
 @api_view(['GET', 'POST'])
 def cart_list(request):
     if request.method == 'GET':
@@ -59,9 +63,10 @@ def cart_list(request):
                 return Response({'error': 'Product already exists'}, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# view for single cart item
 @api_view(['GET', 'PUT', 'DELETE'])
 def cart_detail(request, pk):
     try:
@@ -85,4 +90,3 @@ def cart_detail(request, pk):
     elif request.method == 'DELETE':
         cart.soft_delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
